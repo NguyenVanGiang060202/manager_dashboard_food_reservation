@@ -2,7 +2,6 @@
 import React from 'react'
 import { DataTable } from '../../../components/manage/data-table'
 import { columns } from '../../../components/manage/columns'
-import { customFetch } from '@/lib/customFetch'
 import useSWR from 'swr'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowLeft, ArrowRight, Armchair} from 'lucide-react'
@@ -10,10 +9,10 @@ import { Button } from '@/components/ui/button'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 
-// const fetcher = (url: string) => customFetch(url)
+
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
-export default function page() {
+export default function Page() {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 

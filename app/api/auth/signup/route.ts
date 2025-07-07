@@ -13,9 +13,9 @@ export async function POST(req: NextRequest) {
         let data: any;
         try {
             data = await res.json();
-        } catch (jsonErr) {
+        } catch (err) {
             return NextResponse.json(
-                { error: 'Cannot read respone from server' },
+                { error: err },
                 { status: 502 }
             );
         }
@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
         );
 
     } catch (err) {
-        console.error('Server Error:', err);
-        return NextResponse.json({ error: 'System error' }, { status: 500 });
+        return NextResponse.json({ error: err }, { status: 500 });
     }
 }

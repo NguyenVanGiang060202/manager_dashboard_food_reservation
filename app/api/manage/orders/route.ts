@@ -34,7 +34,6 @@ export async function GET(req: Request) {
         console.log(data)
         return NextResponse.json(data, { status: 200 })
     } catch (error: any) {
-        console.error('API route error:', error)
         return NextResponse.json({
             message: 'Internal server error',
             error: error.message || 'Unknown error',

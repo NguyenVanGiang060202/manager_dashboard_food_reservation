@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/auth-store";
+import Image from "next/image";
 
 export default function LoginPage() {
 
@@ -98,7 +99,7 @@ export default function LoginPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="email"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Email
@@ -124,7 +125,7 @@ export default function LoginPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="password"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Password
@@ -175,7 +176,7 @@ export default function LoginPage() {
                             <CardFooter className="grid gap-4">
                                 <div className="relative flex justify-center  text-sm">
                                     <span className="">
-                                        Don't have an account?
+                                        Don&apos;t have an account?
                                     </span>
                                     <Link
                                         rel="next"
@@ -191,7 +192,7 @@ export default function LoginPage() {
                 </div>
             </div>
             <div className="bg-muted relative hidden lg:block">
-                <img
+                <Image
                     src="/restaurant-image.jpg"
                     alt="Image"
                     className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"

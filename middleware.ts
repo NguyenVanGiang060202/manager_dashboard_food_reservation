@@ -6,7 +6,7 @@ const publicRoutes = ['/login', '/signup']
 
 
 export async function middleware(req: NextRequest) {
-  const { accessToken } = await verifySession()
+  const accessToken = await verifySession()
   const path = req.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(path)
   const isPublicRoute = publicRoutes.includes(path)

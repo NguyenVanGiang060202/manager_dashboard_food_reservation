@@ -18,11 +18,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import FilterTableUsers from "./filter-table"
 import SearchTableUser from "./search-table"
 import EditMultipleUser from "./menu-action"
-import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]

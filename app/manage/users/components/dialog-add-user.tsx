@@ -1,19 +1,15 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { CalendarIcon, Link, Loader, Plus } from "lucide-react"
+import { CalendarIcon, Loader, Plus } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -24,9 +20,9 @@ import { useState } from "react"
 
 import { addUserSchema } from "@/schema/manage-users"
 import type { AddUser } from "@/types/manage-users"
-import { Calendar } from "@/components/ui/calendar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
+import { Calendar } from "@/components/ui/calendar"
 
 
 export function AddUser() {
@@ -101,7 +97,7 @@ export function AddUser() {
                                     <FormField
                                         control={form.control}
                                         name="name"
-                                        render={({ field }) => (
+                                        render={({ }) => (
                                             <FormItem>
                                                 <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                     Name
@@ -127,7 +123,7 @@ export function AddUser() {
                                     <FormField
                                         control={form.control}
                                         name="email"
-                                        render={({ field }) => (
+                                        render={({ }) => (
                                             <FormItem>
                                                 <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                     Email
@@ -196,7 +192,7 @@ export function AddUser() {
                                     <FormField
                                         control={form.control}
                                         name="phone"
-                                        render={({ field }) => (
+                                        render={({ }) => (
                                             <FormItem>
                                                 <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                     Phone number

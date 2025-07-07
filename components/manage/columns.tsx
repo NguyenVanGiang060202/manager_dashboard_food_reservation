@@ -6,7 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { User } from "@/types/manage-users"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
-import { ArrowDown, ArrowDownAZ, ArrowUpAZ, ArrowUpDown, ChevronDown, ChevronsDownUp, ChevronUp, Edit, Eye, Lock, MoreHorizontal, Trash2 } from "lucide-react"
+import { ArrowDownAZ, ArrowUpAZ, ArrowUpDown, Edit, Eye, Lock, MoreHorizontal, Trash2 } from "lucide-react"
 
 export const columns: ColumnDef<User>[] = [
 	{

@@ -10,7 +10,8 @@ import { signupFormSchema } from '@/schema/auth'
 import { signupFormValues } from '@/types/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { ArrowLeft, CalendarIcon, GalleryVerticalEnd, Loader } from 'lucide-react'
+import { CalendarIcon, GalleryVerticalEnd, Loader } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -94,7 +95,7 @@ export default function SignupPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="name"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Name
@@ -120,7 +121,7 @@ export default function SignupPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="email"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Email
@@ -190,7 +191,7 @@ export default function SignupPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="phone"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Phone number
@@ -217,7 +218,7 @@ export default function SignupPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="password"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Password
@@ -242,7 +243,7 @@ export default function SignupPage() {
                                             <FormField
                                                 control={form.control}
                                                 name="confirmPassword"
-                                                render={({ field }) => (
+                                                render={({ }) => (
                                                     <FormItem>
                                                         <FormLabel className="after:content-['_*'] after:text-red-600 pb-1">
                                                             Confirm Password
@@ -295,7 +296,7 @@ export default function SignupPage() {
                 </div>
             </div>
             <div className="bg-muted relative hidden lg:block">
-                <img
+                <Image
                     src="/restaurant-image.jpg"
                     alt="Image"
                     className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
