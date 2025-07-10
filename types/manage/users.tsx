@@ -1,4 +1,4 @@
-import { userSchema, addUserSchema } from "@/schema/manage-users";
+import { userSchema, addUserSchema } from "@/schema/manage/users";
 import z from "zod";
 
 

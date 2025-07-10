@@ -295,10 +295,11 @@ export default function SignupPage() {
                     </div>
                 </div>
             </div>
-            <div className="bg-muted relative hidden lg:block">
+            <div className="bg-muted relative hidden lg:block w-full h-full">
                 <Image
                     src="/restaurant-image.jpg"
                     alt="Image"
+                    fill
                     className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
                 />
             </div>

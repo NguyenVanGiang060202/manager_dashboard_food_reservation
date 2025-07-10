@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { DataTable } from '../../../components/manage/data-table'
-import { columns } from '../../../components/manage/columns'
+import { DataTable } from './components/table-tables'
+import { columns } from './components/columns-tables'
 import useSWR from 'swr'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowLeft, ArrowRight, Armchair} from 'lucide-react'
@@ -25,7 +25,7 @@ export default function Page() {
 		revalidateOnFocus: true,
 	})
 
-	console.log(data)
+	const listTables = data?.table?.data
 
 	const nextPage = () => {
 		const params = new URLSearchParams(searchParams.toString())
@@ -42,7 +42,7 @@ export default function Page() {
 
 	if (isLoading) return <div>Loading...</div>
 	if (error) return <div>Error: {error.message}</div>
-	if (data) {
+	if (listTables) {
 		return (
 			<div className='min-h-screen max-w-screen w-full h-full p-4 overflow-hidden border space-y-4 '>
 				<div className="w-full flex justify-between border rounded-lg p-4 shadow-lg">
@@ -72,12 +72,12 @@ export default function Page() {
 					</div>
 				</div>
 				<div className="rounded-lg border w-full h-full shadow-lg">
-					<DataTable columns={columns} data={data.data} />
-					<div className="flex justify-end items-center gap-4 py-4 p-2">
+					<DataTable columns={columns} data={listTables?.tables} />
+					<div className="flex justify-end items-center gap-4 p-2">
 						<Button
 							variant="outline"
 							onClick={prevPage}
-							disabled={page <= 1}
+							disabled={listTables?.meta?.currentPage <= 1}
 						>
 							<ArrowLeft className="mr-2 h-4 w-4" />
 							Previous
@@ -85,7 +85,7 @@ export default function Page() {
 						<Button
 							variant="outline"
 							onClick={nextPage}
-							disabled={page >= data.totalPages}
+							disabled={listTables?.meta?.currentPage >= listTables?.meta?.totalPages}
 						>
 							Next
 							<ArrowRight className="mr-2 h-4 w-4" />

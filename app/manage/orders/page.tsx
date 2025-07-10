@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { DataTable } from '../../../components/manage/data-table'
-import { columns } from '../../../components/manage/columns'
+import { DataTable } from './components/table-tables'
+import { columns } from './components/columns-tables'
 import useSWR from 'swr'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowLeft, ArrowRight, ListChecks } from 'lucide-react'
@@ -24,7 +24,7 @@ export default function Page() {
 		revalidateOnFocus: true,
 	})
 
-	console.log(data)
+	const listOrders = data?.order?.data
 
 	const nextPage = () => {
 		const params = new URLSearchParams(searchParams.toString())
@@ -71,7 +71,7 @@ export default function Page() {
 					</div>
 				</div>
 				<div className="rounded-lg border w-full h-full shadow-lg">
-					<DataTable columns={columns} data={data.data} />
+					<DataTable columns={columns} data={listOrders?.orders} />
 					<div className="flex justify-end items-center gap-4 py-4 p-2">
 						<Button
 							variant="outline"
@@ -84,7 +84,7 @@ export default function Page() {
 						<Button
 							variant="outline"
 							onClick={nextPage}
-							disabled={page >= data.totalPages}
+							disabled={page >= listOrders?.meta?.totalPages}
 						>
 							Next
 							<ArrowRight className="mr-2 h-4 w-4" />

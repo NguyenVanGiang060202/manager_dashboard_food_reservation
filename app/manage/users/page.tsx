@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import { DataTable } from '../../../components/manage/data-table'
-import { columns } from '../../../components/manage/columns'
+import { DataTable } from './components/table-users'
+import { columns } from './components/columns-users'
 import useSWR from 'swr'
-import { AddUser } from './components/dialog-add-user'
+import { AddUser } from './components/dialog-add-users'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowLeft, ArrowRight, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -26,9 +26,7 @@ export default function Page() {
 		revalidateOnFocus: true,
 	})
 
-	const listUsers = data?.data?.data?.data
-
-	console.log(data)
+	const listUsers = data?.user?.data
 
 	const nextPage = () => {
 		const params = new URLSearchParams(searchParams.toString())
@@ -76,12 +74,12 @@ export default function Page() {
 					</div>
 				</div>
 				<div className="rounded-lg border w-full h-full shadow-lg">
-					<DataTable columns={columns} data={listUsers} />
+					<DataTable columns={columns} data={listUsers?.users} />
 					<div className="flex justify-end items-center gap-4 py-4 p-2">
 						<Button
 							variant="outline"
 							onClick={prevPage}
-							disabled={page <= 1}
+							disabled={listUsers?.meta?.currentPage <= 1}
 						>
 							<ArrowLeft className="mr-2 h-4 w-4" />
 							Previous
@@ -89,7 +87,7 @@ export default function Page() {
 						<Button
 							variant="outline"
 							onClick={nextPage}
-							disabled={page >= data.totalPages}
+							disabled={listUsers?.meta?.currentPage >= listUsers?.meta?.totalPages}
 						>
 							Next
 							<ArrowRight className="mr-2 h-4 w-4" />

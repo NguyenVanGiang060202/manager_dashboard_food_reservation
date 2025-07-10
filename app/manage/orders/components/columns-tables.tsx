@@ -3,14 +3,15 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { User } from "@/types/manage-users"
+import { Order } from "@/types/manage/order"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 import { ArrowDownAZ, ArrowUpAZ, ArrowUpDown, Edit, Eye, Lock, MoreHorizontal, Trash2 } from "lucide-react"
+import { toast } from "sonner"
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Order>[] = [
 	{
-		id: "select",
+		accessorKey: "select",
 		header: ({ table }) => (
 			<Checkbox
 				checked={table.getIsAllPageRowsSelected()}
@@ -45,13 +46,13 @@ export const columns: ColumnDef<User>[] = [
 
 	},
 	{
-		accessorKey: 'name',
+		accessorKey: 'customer.name',
 		header: ({ column }) => (
 			<div
 				onClick={() => column.toggleSorting()}
 				className="cursor-pointer flex items-center gap-2"
 			>
-				Name
+				Customer Name
 				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
 					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
 			</div>
@@ -59,79 +60,33 @@ export const columns: ColumnDef<User>[] = [
 		enableResizing: true,
 	},
 	{
-		accessorKey: 'email',
+		accessorKey: 'orderType',
 		header: ({ column }) => (
 			<div
 				onClick={() => column.toggleSorting()}
 				className="cursor-pointer flex items-center gap-2"
 			>
-				Email
+				Order Type
 				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
 					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
 			</div>
 		),
 		enableResizing: true,
+		cell: ({ getValue }) => (getValue() === "dine-in" ? <Badge variant="destructive">Dine-in</Badge> : <Badge variant="default">Takeaway</Badge>),
 	},
 	{
-		accessorKey: 'dateOfBirth',
+		accessorKey: 'menu.name',
 		header: ({ column }) => (
 			<div
 				onClick={() => column.toggleSorting()}
 				className="cursor-pointer flex items-center gap-2"
 			>
-				Date of Birth
+				Menu Name
 				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
 					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
 			</div>
 		),
 		enableResizing: true,
-		cell: ({ getValue }) => {
-			const date = getValue() as Date
-			return format(date, 'dd/MM/yyyy')
-		},
-	},
-	{
-		accessorKey: 'phone',
-		header: ({ column }) => (
-			<div
-				onClick={() => column.toggleSorting()}
-				className="cursor-pointer flex items-center gap-2"
-			>
-				Phone
-				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
-					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
-			</div>
-		),
-		enableResizing: true,
-	},
-	{
-		accessorKey: 'role',
-		header: ({ column }) => (
-			<div
-				onClick={() => column.toggleSorting()}
-				className="cursor-pointer flex items-center gap-2"
-			>
-				Role
-				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
-					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
-			</div>
-		),
-		enableResizing: true,
-		cell: ({ getValue }) => {
-			const role = getValue() as string;
-
-			const roleColors: Record<string, string> = {
-				ADMIN: "bg-green-500",
-				STAFF: "bg-yellow-500",
-				USER: "bg-red-500",
-			};
-
-			return (
-				<Badge className={`${roleColors[role] ?? "bg-gray-500"} text-white`}>
-					{role}
-				</Badge>
-			);
-		}
 	},
 	{
 		accessorKey: 'status',
@@ -146,37 +101,56 @@ export const columns: ColumnDef<User>[] = [
 			</div>
 		),
 		enableResizing: true,
-		cell: ({ getValue }) => (getValue() === "ACTIVE" ? <Badge className="bg-green-500 text-white">ACTIVE</Badge> : <Badge className="bg-red-500 text-white">INACTIVE</Badge>),
+		cell: ({ getValue }) => {
+			const status = getValue() as string;
+
+			const statusColors: Record<string, string> = {
+				pending: "bg-green-500",
+				preparing: "bg-yellow-500",
+				served: "bg-red-500",
+				completed: "bg-gray-500",
+				cancelled: "bg-blue-500",
+			};
+
+			return (
+				<Badge className={`${statusColors[status] ?? "bg-gray-500"} text-white`}>
+					{status}
+				</Badge>
+			);
+		}
 	},
 	{
-		accessorKey: 'isActive',
+		accessorKey: 'table.number',
 		header: ({ column }) => (
 			<div
 				onClick={() => column.toggleSorting()}
 				className="cursor-pointer flex items-center gap-2"
 			>
-				Active
+				Table Number
 				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
 					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
 			</div>
 		),
 		enableResizing: true,
-		cell: ({ getValue }) => (getValue() ? <Badge className="bg-green-500 text-white">Active</Badge> : <Badge variant="destructive">Inactive</Badge>),
+		cell: ({ getValue }) => {
+			const tableNumber = getValue() as string
+			return tableNumber ? <div className="">{tableNumber}</div> : <div className="">Take Away</div>
+		}
 	},
 	{
-		accessorKey: 'isDeleted',
+		accessorKey: 'isAvailable',
 		header: ({ column }) => (
 			<div
 				onClick={() => column.toggleSorting()}
 				className="cursor-pointer flex items-center gap-2"
 			>
-				Is Deleted
+				Available
 				{column.getIsSorted() === "asc" ? <ArrowUpAZ className="size-6" /> :
 					column.getIsSorted() === "desc" ? <ArrowDownAZ className="size-6" /> : <ArrowUpDown className="size-6" />}
 			</div>
 		),
 		enableResizing: true,
-		cell: ({ getValue }) => (getValue() ? <Badge variant="destructive">Yes</Badge> : <Badge variant="default">No</Badge>),
+		cell: ({ getValue }) => (getValue() ? <Badge className="bg-green-500 text-white">Available</Badge> : <Badge className="bg-red-500 text-white">Not Available</Badge>),
 	},
 	{
 		accessorKey: 'deleted',
@@ -231,9 +205,10 @@ export const columns: ColumnDef<User>[] = [
 	},
 	{
 		id: "actions",
-		header: () => <div className="text-right">Actions</div>,
+		header: () => <div>Actions</div>,
+		size: 70,
 		cell: ({ row }) => {
-			const user = row.original
+			const order = row.original
 			return (
 				<div className="text-right">
 					<DropdownMenu>
@@ -245,19 +220,19 @@ export const columns: ColumnDef<User>[] = [
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Actions</DropdownMenuLabel>
-							<DropdownMenuItem onClick={() => console.log("View", user)}>
+							<DropdownMenuItem onClick={() => toast("Viewing order")}>
 								<Eye className="mr-2 h-4 w-4" /> View
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => console.log("Edit", user)}>
+							<DropdownMenuItem onClick={() => toast("Editing order")}>
 								<Edit className="mr-2 h-4 w-4" /> Edit
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => console.log("Toggle status", user)}>
+							<DropdownMenuItem onClick={() => toast("Status order")}>
 								<Lock className="mr-2 h-4 w-4" />
-								{user.status === "ACTIVE" ? "Deactivate" : "Activate"}
+								{order.deleted ? "Deactivate" : "Activate"}
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem
-								onClick={() => console.log("Delete", user)}
+								onClick={() => toast("Delete order")}
 								className="text-red-600"
 							>
 								<Trash2 className="mr-2 h-4 w-4" /> Delete

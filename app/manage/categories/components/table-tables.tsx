@@ -19,9 +19,9 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useState } from "react"
-import FilterTableUsers from "./filter-table"
-import SearchTableUser from "./search-table"
-import EditMultipleUser from "./menu-action"
+import FilterTableUsers from "@/components/manage/filter-table"
+import SearchTableUser from "@/components/manage/search-table"
+import EditMultipleUser from "@/components/manage/menu-action"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
     }
 
     return (
-        <div className=" p-4 border-b w-full h-[calc(100vh-14rem)] overflow-auto space-y-4">
+        <div className=" p-4 border-b w-full h-full overflow-auto space-y-4">
             <div className="w-full flex justify-between items-center gap-4 ">
                 <div className="w-full flex justify-start items-center gap-4">
                     <SearchTableUser />
@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
                 </div>
                 {Object.keys(rowSelection).length !== 0 && <EditMultipleUser />}
             </div>
-            <Table className="table-fixed w-full ">
+            <Table className="table-fixed w-full h-full">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
@@ -145,7 +145,7 @@ export function DataTable<TData, TValue>({
                                     <TableCell
                                         key={cell.id}
                                         style={style}
-                                        className="text-lg truncate max-w-[200px] "
+                                        className="text-lg truncate max-w-[200px] p-1.5"
                                         title={String(cell.getValue())}
                                     >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}

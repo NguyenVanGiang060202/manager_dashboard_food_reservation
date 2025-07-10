@@ -44,8 +44,8 @@ export async function POST(req: NextRequest) {
             path: '/',
         }
 
-        response.cookies.set('accessToken', data.accessToken, cookieOptions)
-        response.cookies.set('refreshToken', data.refreshToken, cookieOptions)
+        response.cookies.set('accessToken', data.accessToken, {...cookieOptions, maxAge: 60 * 10})
+        response.cookies.set('refreshToken', data.refreshTokens, {...cookieOptions, maxAge: 60 * 60 * 24})
 
         return response
     } catch (err) {

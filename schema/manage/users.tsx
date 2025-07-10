@@ -19,22 +19,10 @@ export const userSchema = z.object({
 
   role: z.enum(['ADMIN', 'STAFF', 'USER']),
   status: z.enum(['ACTIVE', 'INACTIVE']),
-  isActive: z.boolean(),
   isDeleted: z.boolean(),
-  deleted: z.boolean(),
 
-  createdAt: z.preprocess(
-    (arg) => {
-      if (typeof arg === 'string' || arg instanceof Date) return new Date(arg)
-    },
-    z.date()
-  ),
-  updatedAt: z.preprocess(
-    (arg) => {
-      if (typeof arg === 'string' || arg instanceof Date) return new Date(arg)
-    },
-    z.date()
-  ),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 })
 
 
@@ -42,7 +30,5 @@ export const addUserSchema = userSchema.omit({
   _id: true,
   createdAt: true,
   updatedAt: true,
-  isActive: true,
   isDeleted: true,
-  deleted: true,
 })

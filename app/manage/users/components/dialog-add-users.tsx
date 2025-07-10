@@ -18,8 +18,8 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { useState } from "react"
 
-import { addUserSchema } from "@/schema/manage-users"
-import type { AddUser } from "@/types/manage-users"
+import { addUserSchema } from "@/schema/manage/users"
+import type { AddUser } from "@/types/manage/users"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
 import { Calendar } from "@/components/ui/calendar"
@@ -36,7 +36,6 @@ export function AddUser() {
 
 
     const onSubmit = async (values: z.infer<typeof addUserSchema>) => {
-        console.log("submit: ", values)
         try {
             setIsLoading(true);
             setError("");
@@ -68,8 +67,7 @@ export function AddUser() {
                 }
             }
         } catch (error) {
-            console.error('Signup error:', error);
-            setError('System error. Please try again later');
+            setError('System error. Please try again later: ' + error);
         } finally {
             setIsLoading(false);
         }
