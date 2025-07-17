@@ -4,7 +4,6 @@ import {
     ColumnPinningState,
     flexRender,
     getCoreRowModel,
-    getPaginationRowModel,
     getSortedRowModel,
     SortingState,
     useReactTable,
@@ -46,7 +45,6 @@ export function DataTable<TData, TValue>({
         onSortingChange: setSorting,
         onRowSelectionChange: setRowSelection,
         onColumnPinningChange: setColumnPinning,
-        getPaginationRowModel: getPaginationRowModel(),
         columnResizeMode: "onChange",
         enableColumnResizing: true,
         state: {
@@ -73,7 +71,7 @@ export function DataTable<TData, TValue>({
                 </div>
                 {Object.keys(rowSelection).length !== 0 && <EditMultipleUser />}
             </div>
-            <Table className="table-fixed w-full h-full">
+            <Table className="table-fixed w-full h-full ">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>

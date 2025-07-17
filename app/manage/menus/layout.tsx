@@ -1,3 +1,4 @@
+import Loading from '@/app/loading';
 import Sidebar from '@/components/navigation/side-bar';
 import React, { Suspense } from 'react'
 
@@ -9,7 +10,7 @@ export default function layout({
   return (
     <div className='flex min-h-screen w-full h-full max-w-screen mx-auto'>
       <Sidebar />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         {children}
       </Suspense>
     </div>

@@ -7,7 +7,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { ArrowLeft, ArrowRight, ListChecks } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRouter, useSearchParams } from 'next/navigation'
-
+import Loading from '@/app/loading'
+import Error from '@/app/error'
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
@@ -39,8 +40,8 @@ export default function Page() {
 	}
 
 
-	if (isLoading) return <div>Loading...</div>
-	if (error) return <div>Error: {error.message}</div>
+	if (isLoading) return <Loading />
+	if (error) return <Error />
 	if (data) {
 		return (
 			<div className='min-h-screen max-w-screen w-full h-full p-4 overflow-hidden border space-y-4 '>

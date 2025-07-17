@@ -4,7 +4,6 @@ import {
     ColumnPinningState,
     flexRender,
     getCoreRowModel,
-    getPaginationRowModel,
     getSortedRowModel,
     SortingState,
     useReactTable,
@@ -46,7 +45,6 @@ export function DataTable<TData, TValue>({
         onSortingChange: setSorting,
         onRowSelectionChange: setRowSelection,
         onColumnPinningChange: setColumnPinning,
-        getPaginationRowModel: getPaginationRowModel(),
         columnResizeMode: "onChange",
         enableColumnResizing: true,
         state: {

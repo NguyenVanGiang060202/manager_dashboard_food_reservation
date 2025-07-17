@@ -8,10 +8,13 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { ArrowLeft, ArrowRight, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Loading from '@/app/loading'
+import Error from '@/app/error'
 
-
-
+ 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
+
+
 
 export default function Page() {
 	const router = useRouter()
@@ -19,7 +22,7 @@ export default function Page() {
 
 	const page = Number(searchParams.get("page") || 1)
 	const limit = Number(searchParams.get("limit") || 10)
-	
+
 
 	const { data, error, isLoading } = useSWR(`/api/manage/users?page=${page}&limit=${limit}`, fetcher, {
 		revalidateOnMount: true,
@@ -41,8 +44,11 @@ export default function Page() {
 	}
 
 
-	if (isLoading) return <div>Loading...</div>
-	if (error) return <div>Error: {error.message}</div>
+	if (isLoading) return <Loading />
+	if (error) {
+		console.error("SWR Error:", error)
+		return <Error />
+	}
 	if (listUsers) {
 		return (
 			<div className='min-h-screen max-w-screen w-full h-full p-4 overflow-hidden border space-y-4 '>

@@ -2,7 +2,7 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { Armchair, ArrowRightFromLine, Hamburger, List, ListChecks, LogOut, Settings, Users } from 'lucide-react'
+import { AppWindow, Armchair, ArrowRightFromLine, Hamburger, List, ListChecks, LogOut, Settings, Users } from 'lucide-react'
 import { useAuthStore } from '@/store/auth-store'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -26,7 +26,7 @@ export default function Sidebar() {
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button variant="outline" size="icon" className='size-12 p-0'>
-                                <ArrowRightFromLine className='size-8'/>
+                                <ArrowRightFromLine className='size-8' />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side='left' className='w-fit'>
@@ -42,7 +42,13 @@ export default function Sidebar() {
                                         Food Booking
                                     </div>
                                 </div>
-                                <div className="h-full flex mt-4 w-full flex-col gap-10">
+                                <div className="h-full flex mt-4 w-full flex-col gap-8">
+                                    <Link href='/dashboard'>
+                                        <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
+                                            <AppWindow className='size-8' />
+                                            Dashboard
+                                        </Button>
+                                    </Link>
                                     <Link href='/manage/users'>
                                         <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
                                             <Users className='size-8' />
@@ -73,12 +79,6 @@ export default function Sidebar() {
                                             Manage Orders
                                         </Button>
                                     </Link>
-                                    <Link href='/setting'>
-                                        <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
-                                            <Settings className='size-8' />
-                                            Settings
-                                        </Button>
-                                    </Link>
                                 </div>
                                 <div className="flex">
                                     <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none' onClick={handleLogout}>
@@ -94,7 +94,12 @@ export default function Sidebar() {
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </div>
-                <div className="h-full flex mt-4 w-full flex-col gap-10">
+                <div className="h-full flex mt-4 w-full flex-col gap-8">
+                    <Link href='/dashboard'>
+                        <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
+                            <AppWindow className='size-8' />
+                        </Button>
+                    </Link>
                     <Link href='/manage/users'>
                         <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
                             <Users className='size-8' />
@@ -118,11 +123,6 @@ export default function Sidebar() {
                     <Link href='/manage/orders'>
                         <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
                             <ListChecks className='size-8' />
-                        </Button>
-                    </Link>
-                    <Link href='/setting'>
-                        <Button className='w-full h-fit rounded-md text-bold text-lg flex bg-white justify-start gap-4 hover:bg-indigo-800 text-indigo-800 hover:text-indigo-50 transition-colors shadow-none'>
-                            <Settings className='size-8' />
                         </Button>
                     </Link>
                 </div>

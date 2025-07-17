@@ -47,7 +47,7 @@ export default function LoginPage() {
 
             if (response.ok) {
                 setUser(data.data);
-                router.push('/manage/users');
+                router.push('/dashboard');
             } else {
                 if (data.errors && Array.isArray(data.errors)) {
                     const messages = data.errors.map((err: any) => `${err.field}: ${err.message}`).join('\n');
@@ -196,6 +196,7 @@ export default function LoginPage() {
                     src="/restaurant-image.jpg"
                     alt="Image"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
                 />
             </div>
