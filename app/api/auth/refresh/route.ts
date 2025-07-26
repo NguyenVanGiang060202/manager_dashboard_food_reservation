@@ -1,11 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers'
 
 
-export async function POST(req: NextRequest) {
+export async function POST() { //req: NextRequest
     try {
         const refreshToken = (await cookies()).get('refreshToken')?.value
-        console.log("refresh token", refreshToken)
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/auth/refresh`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -46,7 +45,6 @@ export async function POST(req: NextRequest) {
             sameSite: 'lax' as const,
             path: '/',
         }
-        console.log("set cookies", data.accessToken, data.refreshToken)
         response.cookies.set('accessToken', data.accessToken, {...cookieOptions, maxAge: 60 * 60 * 24})
         response.cookies.set('refreshToken', data.refreshToken, {...cookieOptions, maxAge: 60 * 60 * 24})
 

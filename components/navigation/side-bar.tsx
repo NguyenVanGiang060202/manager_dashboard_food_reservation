@@ -2,7 +2,7 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { AppWindow, Armchair, ArrowRightFromLine, Hamburger, List, ListChecks, LogOut, Settings, Users } from 'lucide-react'
+import { AppWindow, Armchair, ArrowRightFromLine, Hamburger, List, ListChecks, LogOut, Users } from 'lucide-react'
 import { useAuthStore } from '@/store/auth-store'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
