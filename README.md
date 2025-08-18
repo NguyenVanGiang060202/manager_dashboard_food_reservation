@@ -2,7 +2,7 @@
 
 A modern, responsive dashboard for managing restaurant food reservations, built with Next.js, TypeScript, and Tailwind CSS.
 
-![Dashboard Preview](./public/restaurant-image.jpg)
+![Dashboard Preview](./public/preview.png)
 
 ## ✨ Features
 
